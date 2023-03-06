@@ -1,4 +1,7 @@
-var config = {
+import "./client.css";
+import "./phaser.d";
+
+const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
@@ -16,9 +19,8 @@ var config = {
   }
 };
 
-var game = new Phaser.Game(config);
-var capy;
-var speed = 5;
+let capy;
+let speed = 5;
 
 function preload () {
   this.load.image('sky', 'assets/image/bg.png');
@@ -30,9 +32,9 @@ function preload () {
 function create () {
   this.add.image(400, 300, 'sky');
 
-  var particles = this.add.particles('red');
+  const particles = this.add.particles('red');
 
-  var emitter = particles.createEmitter({
+  const emitter = particles.createEmitter({
     speed: 100,
     scale: { start: 1, end: 0 },
     blendMode: 'ADD'
@@ -60,11 +62,18 @@ function create () {
     repeat: -1
   });
   const sprite = this.add.sprite(600, 370);
-        sprite.setScale(4);
-        sprite.play('walk');
-  
+  sprite.setScale(4);
+  sprite.play('walk');
+
 }
 
 function update() {
   capy.angle += speed;
 }
+
+export function init(): void {
+  console.log("capy.run!");
+  new Phaser.Game(config);
+}
+
+document.addEventListener("DOMContentLoaded", init);
