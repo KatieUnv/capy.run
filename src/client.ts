@@ -61,10 +61,37 @@ function create () {
     frameRate: 8,
     repeat: -1
   });
+
+
+  this.anims.create({
+    key: "standing",
+    frames: this.anims.generateFrameNumbers('capy', { frames: [9, 10, 11, 12, 13, 14, 15, 16]}),
+    frameRate: 8,
+    repeat: -1
+  });
+
+  this.anims.create({
+    key: "sitting",
+    frames: this.anims.generateFrameNumbers('capy', {frames: [36, 37, 38, 39, 40, 41, 42, 43]}),
+    frameRate: 8,
+    repeat: -1
+  })
+
+  this.anims.create({
+    key: "sitDown",
+    frames: this.anims.generateFrameNumbers('capy', {frames: [18, 19, 20]}),
+    frameRate: 8
+  })
+
+  this.anims.create({
+    key: "standUp",
+    frames: this.anims.generateFrameNumbers('capy', {frames: [45, 46, 47]}),
+    frameRate: 8
+  })
+
   const sprite = this.add.sprite(600, 370);
   sprite.setScale(4);
-  sprite.play('walk');
-
+  sprite.play('sitting');
 }
 
 function update() {
