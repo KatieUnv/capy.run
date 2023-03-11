@@ -78,7 +78,7 @@ function create() {
 
 
   cursors = this.input.keyboard.createCursorKeys();
-  this.load.image('soil', 'assets/image/ground.png');
+  
   ground = this.add.tileSprite(0, 400, 800, 200, 'soil');
   ground.originX = 0;
   ground.originY = 0;
