@@ -1,5 +1,7 @@
+import { createBackground } from "./background";
 import "./client.css";
 import "./phaser.d";
+import { createSpinny, updateSpinny } from "./spinny";
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -19,30 +21,27 @@ const config: Phaser.Types.Core.GameConfig = {
   }
 };
 
-let capy;
-let speed = 5;
 let cursors;
-var bigCap;
-var rightKey;
-var leftKey;
+var capy;
 
-function preload () {
+function preload() {
   this.load.image('sky', 'assets/image/bg.png');
-  
+  createBackground(this);
   this.load.image('standing1', 'assets/image/standing.png');
-  this.load.spritesheet('capy', 'assets/image/capioca.png', { frameWidth: 64, frameHeight: 64})
+  this.load.spritesheet('capy', 'assets/image/capioca.png', { frameWidth: 64, frameHeight: 64 })
 }
 
-function create () {
-  this.add.image(400, 300, 'sky');
+var bg1;
+var bg2; 
+var bg3;
+var bg4;
 
-  capy = this.physics.add.image(400, 100, 'standing1');
-
-  capy.setVelocity(100, 200);
-  capy.setBounce(1, 1);
-  capy.setCollideWorldBounds(true);
-
-
+function create() {
+  bg1 = this.add.tileSprite(400, 170, 800, 370, 'layer1');
+  bg2 = this.add.tileSprite(400, 200, 800, 370, 'layer2');
+  bg3 = this.add.tileSprite(400, 200, 800, 370, 'layer3');
+  bg4 = this.add.tileSprite(400, 200, 800, 370, 'layer4');
+  createSpinny(this);
   this.anims.create({
     key: 'walk',
     frames: this.anims.generateFrameNumbers('capy', { frames: [72, 73, 74, 75, 76, 77, 78, 79] }),
@@ -52,64 +51,46 @@ function create () {
 
   this.anims.create({
     key: "standing",
-    frames: this.anims.generateFrameNumbers('capy', { frames: [9, 10, 11, 12, 13, 14, 15, 16]}),
+    frames: this.anims.generateFrameNumbers('capy', { frames: [9, 10, 11, 12, 13, 14, 15, 16] }),
     frameRate: 8,
     repeat: -1
   });
 
   this.anims.create({
     key: "sitting",
-    frames: this.anims.generateFrameNumbers('capy', {frames: [27, 28, 29, 30, 31, 32, 33, 34]}),
+    frames: this.anims.generateFrameNumbers('capy', { frames: [27, 28, 29, 30, 31, 32, 33, 34] }),
     frameRate: 8,
     repeat: -1
   });
 
-  bigCap = this.add.sprite(150, 450);
-  bigCap.setScale(2);
-  bigCap.play('standing');
+  capy = this.add.sprite(150, 338);
+  capy.setScale(2);
+  capy.play('standing');
 
 
   cursors = this.input.keyboard.createCursorKeys();
 
-  rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-  leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 }
 
 function update() {
-  capy.angle += speed;
-
-
-  if(Phaser.Input.Keyboard.JustDown(rightKey)){
-    bigCap.flipX = false;
-    bigCap.play("walk");
+  updateSpinny();
+  if (Phaser.Input.Keyboard.JustDown(cursors.right)) {
+    capy.play('walk');
   }
 
-  else if(Phaser.Input.Keyboard.JustDown(leftKey)){
-    bigCap.flipX = true;
-    bigCap.play("walk");
-  }
-
-  else if (cursors.right.isDown){
-    bigCap.x += 4;
-  }
-
-  else if (cursors.left.isDown){
-    bigCap.x -= 4;
-  }
-
-  else if (Phaser.Input.Keyboard.JustUp(rightKey)){
-    bigCap.play('standing');
-  }
-
-  else if (Phaser.Input.Keyboard.JustUp(leftKey)){
-    bigCap.play('standing');
-  }
-
+  if (cursors.right.isDown) {
+        bg4.tilePositionX += 4;
+        bg3.tilePositionX += 3;
+        bg2.tilePositionX += 2;
+        bg1.tilePositionX += 1;
+    }
+  if (Phaser.Input.Keyboard.JustUp(cursors.right)) {
+        capy.play('standing');
+    }
 
 }
 
 export function init(): void {
-  console.log("capy.run!");
   new Phaser.Game(config);
 }
 
