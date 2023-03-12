@@ -19,6 +19,7 @@ jobs:
     - name: build
       run: ./node_modules/.bin/esbuild src/client.ts --outdir=www/assets --bundle --minify --sourcemap
     - name: deploy
-      uses: JamesIves/github-pages-deploy-action@v4
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        folder: www
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: www
