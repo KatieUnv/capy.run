@@ -18,3 +18,7 @@ jobs:
       run: npm install --save-exact esbuild
     - name: build
       run: ./node_modules/.bin/esbuild src/client.ts --outdir=www/assets --bundle --minify --sourcemap
+    - name: deploy
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: www
