@@ -41,6 +41,7 @@ function create() {
   bg1 = this.add.tileSprite(0, 0, 800, 370, 'layer1');
   bg2 = this.add.tileSprite(0, 0, 800, 370, 'layer2');
   bg3 = this.add.tileSprite(0, 0, 800, 370, 'layer3');
+  createSpinny(this);
   bg4 = this.add.tileSprite(0, 0, 800, 370, 'layer4');
   
   var bglayers = [bg1, bg2, bg3, bg4];
@@ -50,7 +51,6 @@ function create() {
     bglayers[i].scale = 450/370;
     bglayers[i].scale = 450/370;
   }
-  createSpinny(this);
   this.anims.create({
     key: 'walk',
     frames: this.anims.generateFrameNumbers('capy', { frames: [72, 73, 74, 75, 76, 77, 78, 79] }),
