@@ -17,4 +17,4 @@ jobs:
     - name: esbuild install
       run: npm install --save-exact esbuild
     - name: build
-      run: esbuild src/client.ts --outdir=www/assets --bundle --minify --sourcemap
+      run: ./node_modules/.bin/esbuild src/client.ts --outdir=www/assets --bundle --minify --sourcemap
