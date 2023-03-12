@@ -9,10 +9,12 @@ jobs:
     name: tsc
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: install node v12
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
-        node-version: 12
-    - name: tsc
-      uses: icrawl/action-tsc@v1
+        node-version: 16.x
+    - name: esbuild install
+      run: npm install --save-exact esbuild
+    - name: build
+      run: esbuild src/client.ts --outdir=www/assets --bundle --minify --sourcemap
