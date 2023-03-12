@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tsc:
+    name: tsc
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: install node v12
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+    - name: esbuild install
+      run: npm install --save-exact esbuild
+    - name: build
+      run: ./node_modules/.bin/esbuild src/client.ts --outdir=www/assets --bundle --minify --sourcemap
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: www
