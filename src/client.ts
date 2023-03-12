@@ -1,15 +1,23 @@
 import "./client.css";
 import "./phaser.d";
-import {createBackground} from "./background";
-import {createSpinny, updateSpinny} from "./spinny";
-import {loadAnimations} from "./animations";
 import Gameplay from "./gameplay";
+
+const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth)
+const defaultHeight = 600;
+const defaultWidth = ratio * defaultHeight;
+
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: defaultWidth,
+  height: defaultHeight,
   parent: "game",
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: defaultWidth,
+    height: defaultHeight
+  },
   physics: {
     default: 'arcade',
     arcade: {
