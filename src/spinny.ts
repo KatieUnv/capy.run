@@ -3,8 +3,8 @@ import "./phaser.d";
 let smallCapy;
 let speed = 5;
 
-export function createSpinny(scene: Phaser.Scene) {
-    smallCapy = scene.physics.add.image(400, 100, 'standing1');
+export function createSpinny(game: Phaser.Scene) {
+    smallCapy = game.physics.add.image(400, 100, 'standing1');
 
     smallCapy.setVelocity(100, 200);
     smallCapy.setBounce(1, 1);

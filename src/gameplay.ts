@@ -17,14 +17,15 @@ export default class Gameplay extends Phaser.Scene {
     this.load.image('sky', 'assets/image/bg.png');
     createBackground(this);
     this.load.image('standing1', 'assets/image/standing.png');
-    this.load.spritesheet('capy', 'assets/image/capioca.png', {frameWidth: 64, frameHeight: 64})
+    this.load.spritesheet('capy', 'assets/image/capioca2.png', {frameWidth: 64, frameHeight: 64})
   }
 
   create() {
-    this.bg1 = this.add.tileSprite(0, 0, 800, 370, 'layer1');
-    this.bg2 = this.add.tileSprite(0, 0, 800, 370, 'layer2');
-    this.bg3 = this.add.tileSprite(0, 0, 800, 370, 'layer3');
-    this.bg4 = this.add.tileSprite(0, 0, 800, 370, 'layer4');
+    this.bg1 = this.add.tileSprite(0, 0, 1100, 370, 'layer1');
+    this.bg2 = this.add.tileSprite(0, 0, 1100, 370, 'layer2');
+    this.bg3 = this.add.tileSprite(0, 0, 1100, 370, 'layer3');
+    createSpinny(this);
+    this.bg4 = this.add.tileSprite(0, 0, 1100, 370, 'layer4');
 
     var bglayers = [this.bg1, this.bg2, this.bg3, this.bg4];
     for (var i = 0; i < bglayers.length; i++) {
@@ -33,7 +34,7 @@ export default class Gameplay extends Phaser.Scene {
       bglayers[i].scale = 450 / 370;
       bglayers[i].scale = 450 / 370;
     }
-    createSpinny(this);
+
     loadAnimations(this);
 
     this.capy = this.add.sprite(150, 400, 'capy');
@@ -42,7 +43,7 @@ export default class Gameplay extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.ground = this.add.tileSprite(0, 400, 800, 200, 'soil');
+    this.ground = this.add.tileSprite(0, 400, 1400, 200, 'soil');
     this.ground.originX = 0;
     this.ground.originY = 0;
   }
